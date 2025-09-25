@@ -9,6 +9,9 @@ import matplotlib.pyplot as plt
 from gaussxw import gaussxwab
 from collections.abc import Callable
 
+plt.rc('text', usetex = True)
+plt.rc('font', family = 'serif')
+
 """
 FUNCTIONS
 """
@@ -51,38 +54,80 @@ g_16 = gaussian_quadrature(g, 0.0, X_0, 16) # Integrate g(x) with N = 16
 print(np.sum(g_8[2]))
 print(np.sum(g_16[2]))
 
-"Plotting Bessel functions using Simpson's rule"
+"Plotting the Integrands at the Sample Points"
 plt.figure()
 
-# Plotting Bessel functions
-plt.plot(g_8[0], 4 / g_8[2], ls = '-', color = 'Teal', label = "$J_0(x)$")
-plt.plot(g_16[0], 4 / g_16[2], ls = '-', color = 'Purple', label = "$J_0(x)$")
+# Plotting integrands at the sample points
+plt.plot(g_8[0], 4 / g_8[2], ls = '-', color = 'Teal', label = "N = 8")
+plt.plot(g_16[0], 4 / g_16[2], ls = '-', color = 'Purple',
+         label = "N = 16")
 
 # Labels
-# plt.title("Bessel Functions Using Simpson's Rule", fontsize = 12)
-# plt.xlabel("x", fontsize = 12)
-# plt.ylabel("$J_n(x)$", fontsize = 12)
+plt.title("Integrands at the Sample Points", fontsize = 12)
+plt.xlabel("$x_k$", fontsize = 12)
+plt.ylabel("$4 / g(x_k)$", fontsize = 12)
 
-# plt.legend()
-# plt.grid()
+plt.legend()
+plt.grid()
 
-# plt.savefig('Figures\\Bessel Functions Using Simpson\'s Rule.pdf')
+plt.savefig('Figures\\Integrands at the Sample Points.pdf')
 plt.show()
 
-"Plotting Bessel functions using Simpson's rule"
+"Plotting Weighted Integrands at the Sample Points"
 plt.figure()
 
-# Plotting Bessel functions
-plt.plot(g_8[0], 4 * g_8[1] / g_8[2], ls = '-', color = 'Teal', label = "$J_3(x)$")
-plt.plot(g_16[0], 4 * g_16[1] / g_16[2], ls = '-', color = 'Purple', label = "$J_3(x)$")
+# Plotting weighted integrands
+plt.plot(g_8[0], 4 * g_8[1] / g_8[2], ls = '-', color = 'Teal',
+         label = "N = 8")
+plt.plot(g_16[0], 4 * g_16[1] / g_16[2], ls = '-', color = 'Purple',
+         label = "N = 16")
 
 # Labels
-# plt.title("Bessel Functions Using Simpson's Rule", fontsize = 12)
-# plt.xlabel("x", fontsize = 12)
-# plt.ylabel("$J_n(x)$", fontsize = 12)
+plt.title("Weighted Integrands at the Sample Points", fontsize = 12)
+plt.xlabel("$x_k$", fontsize = 12)
+plt.ylabel("$4w_k / g(x_k)$", fontsize = 12)
 
-# plt.legend()
-# plt.grid()
+plt.legend()
+plt.grid()
 
-# plt.savefig('Figures\\Bessel Functions Using Simpson\'s Rule.pdf')
+plt.savefig('Figures\\Weighted Integrands at the Sample Points.pdf')
 plt.show()
+
+"""
+PART C)
+"""
+"Constants"
+K = 12.0
+M = 1.0
+X_C = 86602540.38
+
+"Integrate the function g(x) using N = 200 sample points"
+g = lambda x: 4 / np.sqrt(K * (x_0 ** 2 - x ** 2))
+
+x_0 = 0.001
+g_200 = gaussian_quadrature(g, 0.0, x_0, 200) # Integrate g(x) with N = 200
+
+print(np.sum(g_200[2]))
+
+x_0 = np.linspace(1.0, 10.0 * X_C, 100)
+period = np.zeros_like(x_0)
+
+for i in range(len(x_0)):
+    period[i] = np.sum(gaussian_quadrature(g, 0.0, x_0[i], 200)[2])
+
+# "Plotting Weighted Integrands at the Sample Points"
+# plt.figure()
+
+# # Plotting weighted integrands
+# plt.plot(x_0, period, ls = '-', color = 'Teal', label = "N = 200")
+
+# # # Labels
+# # plt.title("Weighted Integrands at the Sample Points", fontsize = 12)
+# # plt.xlabel("$x_k$", fontsize = 12)
+# # plt.ylabel("$4w_k / g(x_k)$", fontsize = 12)
+
+# # plt.legend()
+# # plt.grid()
+
+# # plt.savefig('Figures\\Weighted Integrands at the Sample Points.pdf')
+# plt.show()
