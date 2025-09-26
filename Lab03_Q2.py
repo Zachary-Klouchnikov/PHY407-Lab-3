@@ -58,8 +58,8 @@ print(np.sum(g_16[2]))
 plt.figure()
 
 # Plotting integrands at the sample points
-plt.plot(g_8[0], 4 / g_8[2], ls = '-', color = 'Teal', label = "N = 8")
-plt.plot(g_16[0], 4 / g_16[2], ls = '-', color = 'Purple',
+plt.plot(g_8[0], g_8[2], ls = '-', color = 'Teal', label = "N = 8")
+plt.plot(g_16[0], g_16[2], ls = '-', color = 'Purple',
          label = "N = 16")
 
 # Labels
@@ -80,9 +80,9 @@ plt.show()
 plt.figure()
 
 # Plotting weighted integrands
-plt.plot(g_8[0], 4 * g_8[1] / g_8[2], ls = '-', color = 'Teal',
+plt.plot(g_8[0], g_8[1] / g_8[2], ls = '-', color = 'Teal',
          label = "N = 8")
-plt.plot(g_16[0], 4 * g_16[1] / g_16[2], ls = '-', color = 'Purple',
+plt.plot(g_16[0], g_16[1] / g_16[2], ls = '-', color = 'Purple',
          label = "N = 16")
 
 # Labels

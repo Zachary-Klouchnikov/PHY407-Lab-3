@@ -65,6 +65,8 @@ for i in range(len(h)):
     f_analytical[i] = f_prime(0.5)
     f_forward_error[i] = np.abs(f_analytical[i] - f_numerical[i])
 
+print(f_forward_error)
+
 """
 PART C) AND D)
 """
