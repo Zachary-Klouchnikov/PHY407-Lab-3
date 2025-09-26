@@ -88,7 +88,7 @@ plt.figure()
 # Plotting absolute error vs step size
 plt.loglog(h, f_forward_error, ls = '-', color = 'Teal', label = "Forward Error")
 plt.loglog(h, f_central_error, ls = '-', color = 'Purple', label = "Central Error")
-plt.vlines(10 ** -8, 10 ** -16, 10 ** 0, linestyles = '--', colors = 'Coral', label = "Minimum Error")
+plt.vlines(10 ** -8, 10 ** -16, 10 ** 1, linestyles = '--', colors = 'Coral', label = "Minimum Error")
 
 # Labels
 plt.title("Absolute Error vs Step Size", fontsize = 12)
@@ -97,6 +97,9 @@ plt.ylabel("Absolute Error", fontsize = 12)
 
 plt.legend()
 plt.grid()
+
+# Limits
+plt.xlim(10 ** -16, 10 ** 0)
 
 plt.savefig('Figures\\Absolute Error vs Step Size.pdf')
 plt.show()

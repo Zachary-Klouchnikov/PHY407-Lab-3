@@ -70,6 +70,9 @@ plt.ylabel("$4 / g(x_k)$", fontsize = 12)
 plt.legend()
 plt.grid()
 
+# Limits
+plt.xlim(0.0, X_0)
+
 plt.savefig('Figures\\Integrands at the Sample Points.pdf')
 plt.show()
 
@@ -90,6 +93,9 @@ plt.ylabel("$4w_k / g(x_k)$", fontsize = 12)
 plt.legend()
 plt.grid()
 
+# Limits
+plt.xlim(0.0, X_0)
+
 plt.savefig('Figures\\Weighted Integrands at the Sample Points.pdf')
 plt.show()
 
@@ -102,32 +108,35 @@ M = 1.0
 X_C = 86602540.38
 
 "Integrate the function g(x) using N = 200 sample points"
-g = lambda x: 4 / np.sqrt(K * (x_0 ** 2 - x ** 2))
+g = lambda x: 4 / np.sqrt(K * np.abs(x_0 ** 2 - x ** 2))
 
 x_0 = 0.001
 g_200 = gaussian_quadrature(g, 0.0, x_0, 200) # Integrate g(x) with N = 200
 
 print(np.sum(g_200[2]))
 
-x_0 = np.linspace(1.0, 10.0 * X_C, 100)
+x_0 = np.linspace(1.0, 10.0 * X_C, 200)
 period = np.zeros_like(x_0)
 
 for i in range(len(x_0)):
-    period[i] = np.sum(gaussian_quadrature(g, 0.0, x_0[i], 200)[2])
+    period[i] = np.sum(gaussian_quadrature(g, 0.0, x_0[i], 200)[0])
 
-# "Plotting Weighted Integrands at the Sample Points"
-# plt.figure()
+"Plotting Period vs Maximum Displacement"
+plt.figure()
 
-# # Plotting weighted integrands
-# plt.plot(x_0, period, ls = '-', color = 'Teal', label = "N = 200")
+# Plotting period vs maximum displacement
+plt.loglog(x_0, period, ls = '-', color = 'Teal', label = "Period")
 
-# # # Labels
-# # plt.title("Weighted Integrands at the Sample Points", fontsize = 12)
-# # plt.xlabel("$x_k$", fontsize = 12)
-# # plt.ylabel("$4w_k / g(x_k)$", fontsize = 12)
+# Labels
+plt.title("Period vs Maximum Displacement", fontsize = 12)
+plt.xlabel("$x_0$", fontsize = 12)
+plt.ylabel("$T(x_0)$", fontsize = 12)
 
-# # plt.legend()
-# # plt.grid()
+plt.legend()
+plt.grid()
 
-# # plt.savefig('Figures\\Weighted Integrands at the Sample Points.pdf')
-# plt.show()
+# Limits
+plt.xlim(1.0, 10.0 * X_C)
+
+plt.savefig('Figures\\Period vs Maximum Displacement.pdf')
+plt.show()
