@@ -119,13 +119,13 @@ x_0 = np.linspace(1.0, 10.0 * X_C, 200)
 period = np.zeros_like(x_0)
 
 for i in range(len(x_0)):
-    period[i] = np.sum(gaussian_quadrature(g, 0.0, x_0[i], 200)[0])
+    period[i] = np.sum(gaussian_quadrature(g, 0.0, x_0[i], 200)[2])
 
 "Plotting Period vs Maximum Displacement"
 plt.figure()
 
 # Plotting period vs maximum displacement
-plt.loglog(x_0, period, ls = '-', color = 'Teal', label = "Period")
+plt.plot(x_0, period, ls = '-', color = 'Teal', label = "Period")
 
 # Labels
 plt.title("Period vs Maximum Displacement", fontsize = 12)
