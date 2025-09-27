@@ -85,7 +85,29 @@ def integrand(x):
     """
     i = 4 / (1+x**2)
     return i
+
+
+def gauss_err(f,a,b,N):
+    """
+    Returns the relative error using Gaussian quadrature for the integrand f
+
+    INPUT:
+    f [function] is the integrand that is being evaluated
+    a [float] is the lower bound of integration
+    b [float] is the upper bound of integration
+    N [int] is the number of slices
+
+    OUTPUT:
+    err [float] is the relative error
+    """
+    x,w = gaussxwab(N,a,b)
+    g_N = np.sum(w*f(x))  #Gauss. approximation for N
     
+    x2,w2 = gaussxwab(2*N,a,b)
+    g_2N = np.sum(w2*f(x2))  #Gauss. approximatoin for 2N
+    
+    err = g_2N - g_N
+    return err
 #Mark Newman functions
 def gaussxw(N):
 
