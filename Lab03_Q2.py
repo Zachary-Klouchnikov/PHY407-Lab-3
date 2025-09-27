@@ -1,6 +1,7 @@
 __authors__ = "Zachary Klouchnikov and Hannah Semple"
 
-# This file follows Q2 of Lab 3 for PHY407. 
+# This file follows Q2 of Lab 3 for PHY407. In this, we calculate the period of a relativistic partical on a spring
+# using Gaussian quadrature.
 """
 IMPORTS
 """
