@@ -108,6 +108,92 @@ def gauss_err(f,a,b,N):
     
     err = g_2N - g_N
     return err
+
+
+def fresnel_s(t):
+    """
+    Returns the integrand of the Fresnel equation S evaluated at t
+
+    INPUT:
+    t [float] is the variable of integration
+
+    OUTPUT:
+    s [float] is the calculated value of the integrand
+    """
+    s = np.sin(np.pi*(t**2)/2)
+    return s
+
+
+def fresnel_c(t):
+    """
+    Returns the integrand of the Fresnel equation C evaluated at t
+
+    INPUT:
+    t [float] is the variable of integration
+
+    OUTPUT:
+    c [float] is the calculated value of the integrand
+    """
+    c = np.cos(np.pi*(t**2)/2)
+    return c
+    
+
+def diffraction(x,z,lam,N):
+    """
+    Returns the intensity of a wave diffracting around a wall at position (x,z), divided by the
+    non-diffracted wave intensity, using our implementation of the Fresnel equations
+
+    INPUT:
+    x [float] is the horizontal distance from the wall in meters
+    z [float] is the vertical distance from the wall in meters
+    lam [float] is the wavelength in meters
+    N [int] is the number of slices
+
+    OUTPUT:
+    I [float] is the wave intensity
+    """
+    u = x*np.sqrt(2/(lam*z))
+    
+    x_i,w = gaussxwab(N,0,u)
+    c_gauss = np.sum(w*fresnel_c(x_i))
+    s_gauss = np.sum(w*fresnel_s(x_i))
+    
+    I = (2*c_gauss + 1)**2 + (2*s_gauss + 1)**2
+    
+    return I/8
+
+
+def diffraction_sc(x,z,lam,N):
+    """
+    Returns the intensity of a wave diffracting around a wall at position (x,z), divided by the
+    non-diffracted wave intensity, using SciPy's implementation of the Fresnel equations
+
+    INPUT:
+    x [float] is the horizontal distance from the wall in meters
+    z [float] is the vertical distance from the wall in meters
+    lam [float] is the wavelength in meters
+    N [int] is the number of slices
+
+    OUTPUT:
+    I [float] is the wave intensity
+    """
+    u = x*np.sqrt(2/(lam*z))
+    
+    s,c = fresnel(u)
+    
+    I = (2*c + 1)**2 + (2*s + 1)**2
+    
+    return I/8
+
+
+def relative_diff(I_sp, I_g):
+    """
+    DOCSTRING
+    """
+    d = np.abs(I_sp - I_g) / I_sp
+    return d
+
+
 #Mark Newman functions
 def gaussxw(N):
 
