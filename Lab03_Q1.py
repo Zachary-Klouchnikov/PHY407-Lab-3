@@ -1,6 +1,7 @@
 __authors__ = "Zachary Klouchnikov and Hannah Semple"
 
-# HEADER
+# This file follows Q1 of Lab 3 for PHY407. We compare integral calculations using Trapezoid rule, Simpson's rule, 
+# and Gaussian quadrature, as well as map wave diffraction intensity using Gaussian quadrature and SciPy
 
 """
 IMPORTS
