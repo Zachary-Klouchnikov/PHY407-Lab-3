@@ -1,5 +1,8 @@
 __authors__ = "Zachary Klouchnikov and Hannah Semple"
 
+# This file follows Q2 of Lab 3 for PHY407. In this, we demonstrated that the optimal step size for forward difference
+# differentiation is sqrt(C) = 10^{-8}
+
 """
 IMPORTS
 """
