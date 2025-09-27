@@ -1,7 +1,8 @@
 __authors__ = "Zachary Klouchnikov and Hannah Semple"
 
-# This file follows Q2 of Lab 3 for PHY407. In this, we demonstrated that the optimal step size for forward difference
-# differentiation is sqrt(C) = 10^{-8}
+# This file answers Q3 of Lab 3 for PHY407. It explores numerical
+# differentiation using the forward difference and central difference
+# methods, and compares the absolute error of each.
 
 """
 IMPORTS
@@ -91,9 +92,12 @@ for i in range(len(h)):
 plt.figure()
 
 # Plotting absolute error vs step size
-plt.loglog(h, f_forward_error, ls = '-', color = 'Teal', label = "Forward Error")
-plt.loglog(h, f_central_error, ls = '-', color = 'Purple', label = "Central Error")
-plt.vlines(10 ** -8, 10 ** -16, 10 ** 1, linestyles = '--', colors = 'Coral', label = "Minimum Error")
+plt.loglog(h, f_forward_error, ls = '-', color = 'Teal',
+           label = "Forward Error")
+plt.loglog(h, f_central_error, ls = '-', color = 'Purple',
+           label = "Central Error")
+plt.vlines(10 ** -8, 10 ** -16, 10 ** 1, linestyles = '--',
+           colors = 'Coral', label = "Minimum Error")
 
 # Labels
 plt.title("Absolute Error vs Step Size", fontsize = 12)
@@ -106,5 +110,5 @@ plt.grid()
 # Limits
 plt.xlim(10 ** -16, 10 ** 0)
 
-plt.savefig('Figures\\Absolute Error vs Step Size.pdf')
+# plt.savefig('Figures\\Absolute Error vs Step Size.pdf')
 plt.show()

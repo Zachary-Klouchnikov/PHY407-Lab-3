@@ -1,7 +1,9 @@
 __authors__ = "Zachary Klouchnikov and Hannah Semple"
 
-# This file follows Q2 of Lab 3 for PHY407. In this, we calculate the period of a relativistic partical on a spring
-# using Gaussian quadrature, and observed its transitions from the classical to the relativistic case.
+# This files answers Q2 of Lab 3 for PHY407. It explores Gaussian
+# quadrature for integration, and applies it to find the period of
+# a particle on a spring with varying amplitude oscillations.
+
 """
 IMPORTS
 """
@@ -75,7 +77,7 @@ plt.grid()
 # Limits
 plt.xlim(0.0, X_0)
 
-plt.savefig('Figures\\Integrands at the Sample Points.pdf')
+# plt.savefig('Figures\\Integrands at the Sample Points.pdf')
 plt.show()
 
 "Plotting Weighted Integrands at the Sample Points"
@@ -98,7 +100,7 @@ plt.grid()
 # Limits
 plt.xlim(0.0, X_0)
 
-plt.savefig('Figures\\Weighted Integrands at the Sample Points.pdf')
+# plt.savefig('Figures\\Weighted Integrands at the Sample Points.pdf')
 plt.show()
 
 """
@@ -113,11 +115,13 @@ X_C = 86602540.38
 g = lambda x: 4 / np.sqrt(K * np.abs(x_0 ** 2 - x ** 2))
 
 x_0 = 0.001
-g_200 = gaussian_quadrature(g, 0.0, x_0, 200) # Integrate g(x) with N = 200
+
+# Integrate g(x) with N = 200
+g_200 = gaussian_quadrature(g, 0.0, x_0, 200)
 
 print(np.sum(g_200[2]))
 
-x_0 = np.linspace(1.0, 10.0 * X_C, 200)
+x_0 = np.linspace(1.0, 10.0 * X_C, 1000)
 period = np.zeros_like(x_0)
 
 for i in range(len(x_0)):
@@ -140,5 +144,5 @@ plt.grid()
 # Limits
 plt.xlim(1.0, 10.0 * X_C)
 
-plt.savefig('Figures\\Period vs Maximum Displacement.pdf')
+# plt.savefig('Figures\\Period vs Maximum Displacement.pdf')
 plt.show()
