@@ -278,6 +278,49 @@ plt.show()
 """
 PART B
 """
+###i
+x = np.linspace(-5,5,50)  #range of x values [m]
+lam = 1  #wavelength [m]
+z = 3  #[m]
+N = 50
+diffs = []  #initialising arrays
+diffs_sc = []
+
+for xi in x:  #calculating diffraction using our implementation and using SciPy
+    diffs.append(diffraction(xi, z, lam, N))
+    diffs_sc.append(diffraction_sc(xi, z, lam, N))
+    
+rel_difference = relative_diff(np.array(diffs_sc), np.array(diffs))  #calculating relative difference
+
+
+fig, axs = plt.subplots(2)
+axs[0].scatter(x, diffs, color = 'purple', label='Manual Calculation')
+axs[0].scatter(x, diffs_sc, color = 'orange', s=10, label='SciPy Calculation')
+axs[0].legend(loc = 'upper left', fontsize = 12)
+axs[0].grid()
+axs[0].set(xlabel='X Value [m]', ylabel='Intensity I/I_0',title='Wave Diffraction Intensity')
+axs[1].scatter(x, rel_difference, color = 'teal')
+axs[1].grid()
+axs[1].set(xlabel='X Value [m]', ylabel='Intensity I/I_0', title='Relative Difference Between Manual \n and SciPy Calculations')
+fig.tight_layout()
+plt.show()
+
+
+###ii
+x = np.linspace(-1,5,30)  #range of x values [m]
+lam = 1  #wavelength [m]
+z = 3  #[m]
+Ns = np.linspace(3,50,48)  #range of N values
+maxs = []  #initialising array
+
+for N in Ns:
+    diffs = []  #initialising arrays
+    diffs_sc = []
+    for xi in x:  #calculating diffraction using our implementation and using SciPy
+        diffs.append(diffraction(xi, z, lam, int(N)))
+        diffs_sc.append(diffraction_sc(xi, z, lam, int(N)))
+    maxs.append(np.max(relative_diff(np.array(diffs_sc), np.array(diffs))))  #finding the max relative difference
+
 
 """
 PART C
