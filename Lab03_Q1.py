@@ -235,7 +235,7 @@ PART A
 """
 ###i 
 Ns = [8,16,32,64,128,256,512,1024,2048]  #initialising array of Ns that will be tested
-
+print('Calulcating integral with all three methods:')
 for N in Ns:
     #trapezoid rule approximation
     trap = trapezoidal_rule(integrand,0,1,N)
@@ -246,9 +246,7 @@ for N in Ns:
     #Gaussian quadrature approximation
     x,w = gaussxwab(N,0,1)
     gauss = np.sum(w*integrand(x))
-
-print('Calulcating integral with all three methods:')
-print(N, ': Trapezoid', trap, ', Simpson\'s', simp,', Gaussian', gauss)
+    print(N, ': Trapezoid', trap, ', Simpson\'s', simp,', Gaussian', gauss)
 
 ###ii
 errs = []  #initialising error array
