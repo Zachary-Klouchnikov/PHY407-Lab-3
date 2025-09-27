@@ -321,7 +321,20 @@ for N in Ns:
         diffs_sc.append(diffraction_sc(xi, z, lam, int(N)))
     maxs.append(np.max(relative_diff(np.array(diffs_sc), np.array(diffs))))  #finding the max relative difference
 
+plt.figure()
+plt.scatter(Ns,maxs, color = 'purple', label = 'Relative Difference')
+plt.yscale('log')
+plt.title('Maximum Value of the Relative Difference as a Function of N')
+plt.xlabel('N Value')
+plt.ylabel('Intensity I/I_0')
+plt.axvline(25, color = 'red', ls ='--', label = 'Optimal N Value')
+plt.grid()
+plt.legend()
+plt.show()
+
 
 """
 PART C
 """
+
+
