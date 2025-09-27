@@ -233,6 +233,47 @@ def gaussxwab(N,a,b):
 """
 PART A
 """
+###i 
+Ns = [8,16,32,64,128,256,512,1024,2048]  #initialising array of Ns that will be tested
+
+for N in Ns:
+    #trapezoid rule approximation
+    trap = trapezoidal_rule(integrand,0,1,N)
+    
+    #Simpson's rule approximation
+    simp = simpsons_rule(integrand,0,1,N)
+    
+    #Gaussian quadrature approximation
+    x,w = gaussxwab(N,0,1)
+    gauss = np.sum(w*integrand(x))
+
+print('Calulcating integral with all three methods:')
+print(N, ': Trapezoid', trap, ', Simpson\'s', simp,', Gaussian', gauss)
+
+###ii
+errs = []  #initialising error array
+for N in Ns:
+    errs.append(gauss_err(integrand,0,1,N))  #getting relative error for each N
+
+plt.figure()
+plt.scatter(Ns,errs, color = 'navy', label='Relative Error')
+plt.xscale('log')
+plt.yscale('log')
+plt.ylim(1e-17,1e-10)
+
+plt.axvline(128, color = 'red', ls = '--', label = 'Unplottable Values')
+plt.text(105,5e-14,'Err = -1.776e-15', rotation='vertical', color ='darkred')
+plt.axvline(512, color = 'red', ls = '--')
+plt.text(420,5e-14,'Err = 0', rotation='vertical', color ='darkred')
+plt.axvline(2048, color = 'red', ls = '--')
+plt.text(1700,5e-14,'Err = -3.553e-15', rotation='vertical', color ='darkred')
+
+plt.grid()
+plt.legend(loc='lower left')
+plt.xlabel('N Value')
+plt.ylabel('Relative Error')
+plt.title('Relative Error Using Gaussian Quadrature')
+plt.show()
 
 """
 PART B
