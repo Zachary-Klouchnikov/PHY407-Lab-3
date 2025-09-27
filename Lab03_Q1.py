@@ -188,13 +188,21 @@ def diffraction_sc(x,z,lam,N):
 
 def relative_diff(I_sp, I_g):
     """
-    DOCSTRING
+    Returns the relative difference between our calculation of the intensity and the calculation using
+    SciPy's Fresnel equations
+
+    INPUT:
+    I_sp [float] is the calculated value using SciPy's Fresnel equations
+    I_q [float] is the calculated value using our implementation
+
+    OUTPUT:
+    d [float] is the relative difference
     """
     d = np.abs(I_sp - I_g) / I_sp
     return d
 
 
-#Mark Newman functions
+###Mark Newman functions###
 def gaussxw(N):
 
     # Initial approximation to roots of the Legendre polynomial
