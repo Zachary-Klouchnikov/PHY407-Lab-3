@@ -23,6 +23,69 @@ plt.rcParams['ytick.labelsize'] = 12
 FUNCTIONS
 """
 
+def trapezoidal_rule(f, a: float, b: float, n: int) -> float:
+    """Returns the integral of a function using the trapezoidal rule.
+    
+    Arguments:
+    f -- the function to be integrated
+    a -- the lower limit of integration
+    b -- the upper limit of integration
+    n -- the number of slices to use in the approximation
+    """
+    # Width of the slices
+    h = (b - a) / n
+
+    # Calculating the endpoints of the integral
+    s = 0.5 * f(a) + 0.5 * f(b)
+
+    # Iterating over the slices between the endpoints
+    for k in range(1, n):
+        s += f(a + k * h)
+
+    return h * s
+
+
+def simpsons_rule(f, a: float, b: float, n: int) -> float:
+    """Returns the integral of a function using Simpson's rule.
+
+    Arguments:
+    f -- the function to be integrated
+    a -- the lower limit of integration
+    b -- the upper limit of integration
+    n -- the number of slices to use in the approximation
+
+    Constraint: n must be even.
+    """
+    # Width of the slices
+    h = (b - a) / n
+
+    # Calculating the endpoints of the integral
+    s = f(a) + f(b)
+
+    # Iterating over the odd slices between the endpoints
+    for k in range(1, n, 2):
+        s += 4 * f(a + k * h)
+
+    # Iterating over the even slices between the endpoints
+    for k in range(2, n, 2):
+        s += 2 * f(a + k * h)
+
+    return h * s / 3
+
+
+def integrand(x):
+    """
+    Returns the integrand for the integral I in Lab03-407-2025.pdf
+
+    INPUT:
+    x [float] is the variable of integration
+
+    OUTPUT:
+    i [float] is the value of the integrand evaluated at x
+    """
+    i = 4 / (1+x**2)
+    return i
+    
 #Mark Newman functions
 def gaussxw(N):
 
