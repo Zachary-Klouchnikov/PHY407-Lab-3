@@ -337,4 +337,27 @@ plt.show()
 PART C
 """
 
+lams = [1,2,4]  #wavelength values in meters
+for lam in lams:
+    fig, ax = plt.subplots(subplot_kw={"projection": "3d"})
 
+    x = np.linspace(-3,10,50)  #initialising arrays
+    z = np.linspace(1,5,50)
+    diff_array = np.zeros((len(x), len(z)))
+
+    for i in range(len(z)):  #calculating diffraction and adding to 2D array
+        for j in range(len(x)):
+            diff_array[i][j] = diffraction(x[j], z[i], lam, 25)
+
+    x, z = np.meshgrid(x, z)
+
+    surf = ax.plot_surface(x, z, diff_array, cmap=cm.viridis, linewidth=0, antialiased=False, vmin=0, vmax=2)
+    fig.colorbar(surf, shrink=0.5, aspect=5, location='left')
+    ax.set_title("Diffraction Wave Intensity", fontsize = 16)
+    ax.set_zlim(0,2)
+    ax.set_xlabel("x [m]", fontsize = 16)
+    ax.set_ylabel("z [m]", fontsize = 16)
+    ax.set_zlabel("I/I_0", fontsize = 16)
+    ax.yaxis.set_inverted(True)
+    fig.tight_layout()
+    plt.show()
